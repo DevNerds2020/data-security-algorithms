@@ -1,4 +1,4 @@
-from Crypto.Cipher import AES
+# Amirreza Alasti - Sina Mokhtari
 from Crypto.Random import get_random_bytes
 
 
