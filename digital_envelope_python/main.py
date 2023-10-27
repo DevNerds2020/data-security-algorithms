@@ -95,7 +95,7 @@ def validate_signature(user_public_key, hash_message, signature):
         print("Signature is invalid")
 
 if __name__ == "__main__":
-    message = "test message"
+    message = "Amirreza Alasti Sina Mokhtari"
     hash_message = SHA.new(message.encode('utf-8'))
     #convert to hex 
     hash_message_hex = hash_message.hexdigest()
@@ -106,7 +106,7 @@ if __name__ == "__main__":
     signature = sign_message(message, user_private_key)
 
     # Assuming you have 'user_public_key', 'hash_message', and 'signature' defined as before
-    validate_signature(user_public_key, hash_message, signature)
+    # validate_signature(user_public_key, hash_message, signature)
     
     final_message = {
         "message": message,
@@ -153,6 +153,9 @@ if __name__ == "__main__":
     # print(message)
 
     message_decrypted_data = json.loads(message_decrypted_json)
+    print(message_decrypted_data)
+    validate_signature(user_public_key, hash_message, signature)
+
 
 
 
