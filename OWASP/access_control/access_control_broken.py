@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, g
+from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -31,14 +31,12 @@ def insecure_db_execute(query):
 
 
 
-@app.before_request
-def before_request():
-    g.roles = ['admin']  # Mock user roles for demonstration purposes
-
 # Broken access control, no proper authorization
 @app.route('/users', methods=['GET'])
 def get_users():
-    if 'admin' in g.roles:
+    #check request header for role
+    role = request.headers.get('role')
+    if role == 'admin':
         users = User.query.all()
         return jsonify([{'username': user.username, 'role': user.role, 'id': user.id} for user in users])
     else:
@@ -47,7 +45,8 @@ def get_users():
 
 @app.route('/change_user_role', methods=['POST'])
 def change_user_role():
-    if 'admin' in g.roles:  # Broken access control, no proper authorization
+    role = request.headers.get('role')
+    if role == 'admin':  # Broken access control, no proper authorization
         user_id = request.json.get('user_id')
         new_role = request.json.get('new_role')
         print(User.query.all())
