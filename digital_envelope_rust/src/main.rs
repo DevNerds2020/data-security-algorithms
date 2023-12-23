@@ -32,7 +32,6 @@ struct DigitalEnvelope {
 
 fn main() {
     //sender side
-
     println!("Enter a string: ");
     let mut input: String = String::new();
     io::stdin()
@@ -80,6 +79,7 @@ fn main() {
     let encrypted_json_data: String =
         serde_json::to_string(&envelope).expect("Failed to serialize");
 
+        
     //receiver side
 
     let received_envelope: DigitalEnvelope =
