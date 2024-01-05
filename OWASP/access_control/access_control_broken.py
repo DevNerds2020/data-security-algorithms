@@ -31,7 +31,6 @@ def insecure_db_execute(query):
     return results[0].fetchone()
 
 
-
 # Broken access control, no proper authorization
 @app.route('/users', methods=['GET'])
 def get_users():
